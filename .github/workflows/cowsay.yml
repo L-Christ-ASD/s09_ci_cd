@@ -32,6 +32,7 @@ jobs:
       run: |
         echo ${{ secrets.COWSAY_MESSAGE }} | cowsay > /var/www/html/cowsay.txt
 
+
     
     - name: test output
       run: |
@@ -55,9 +56,4 @@ jobs:
 
 
 
-#    - name: Set up Nginx
-#      run: |
-#        sudo apt-get update
-#        sudo apt-get install -y nginx
-#        sudo service nginx start
-#        sudo cp /var/www/html/cowsay.txt /usr/share/nginx/html/cowsay.txt
+
