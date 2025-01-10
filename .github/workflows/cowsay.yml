@@ -39,6 +39,17 @@ jobs:
     - name: Upload static files as artifact
       id: deployment
       uses: actions/upload-artifact@v4
+
+        echo ${{ secrets.COWSAY_MESSAGE }} | cowsay > /var/www/html/cowsay.txt
+    
+    - name: test output
+      run: |
+        grep "_,,_" cowsay.txt
+    
+    - name: Upload static files as artifact
+      id: deployment
+      uses: actions/upload-artifact@v4 # or specific "vX.X.X" version tag for this action
+
       with:
         path: cowsay.txt
         name: notrevache
@@ -52,8 +63,10 @@ jobs:
           path: /var/www/html/
           name: notrevache
 
+
       - name: Grant write permissions
         run: sudo chmod 777 /var/www/html/cowsay.txt
       
       - name: Write Cowsay file
         run: echo ${{ secrets.COWSAY_MESSAGE }} | cowsay > /var/www/html/cowsay.txt
+
