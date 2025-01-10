@@ -30,43 +30,11 @@ jobs:
 
     - name: Create Cowsay file
       run: |
-        echo ${{ secrets.COWSAY_MESSAGE }} | cowsay > cowsay.txt
-
-    - name: Test output
-      run: |
-        grep "_,,_" cowsay.txt
-
-    - name: Upload static files as artifact
-      id: deployment
-      uses: actions/upload-artifact@v4
-
         echo ${{ secrets.COWSAY_MESSAGE }} | cowsay > /var/www/html/cowsay.txt
-    
-    - name: test output
+
+    - name: Set up Nginx
       run: |
-        grep "_,,_" cowsay.txt
-    
-    - name: Upload static files as artifact
-      id: deployment
-      uses: actions/upload-artifact@v4 # or specific "vX.X.X" version tag for this action
-
-      with:
-        path: cowsay.txt
-        name: notrevache
-
-  deploy:
-    runs-on: self-hosted
-
-    steps:
-      - uses: actions/download-artifact@v4
-        with:
-          path: /var/www/html/
-          name: notrevache
-
-
-      - name: Grant write permissions
-        run: sudo chmod 777 /var/www/html/cowsay.txt
-      
-      - name: Write Cowsay file
-        run: echo ${{ secrets.COWSAY_MESSAGE }} | cowsay > /var/www/html/cowsay.txt
-
+        sudo apt-get update
+        sudo apt-get install -y nginx
+        sudo service nginx start
+        sudo cp /var/www/html/cowsay.txt /usr/share/nginx/html/cowsay.txt
