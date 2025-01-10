@@ -31,8 +31,6 @@ jobs:
     - name: Create Cowsay file
       run: |
         echo ${{ secrets.COWSAY_MESSAGE }} | cowsay > /var/www/html/cowsay.txt
-
-
     
     - name: test output
       run: |
