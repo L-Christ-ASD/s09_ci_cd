@@ -51,17 +51,17 @@ jobs:
       - name: Check network connectivity
         run: ping -c 4 github.com
 
-      - name: Download artifact with retries
-        run: |
-          for i in {1..5}; do
-            actions/download-artifact@v4 --path /var/www/html/ --name notrevache && break
-            echo "Retry $i/5 failed. Retrying in 10 seconds..."
-            sleep 10
-          done
-        shell: bash
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          path: /var/www/html/
+          name: notrevache
 
       - name: Print downloaded files
         run: ls -la /var/www/html/
+
+      - name: Grant write permissions
+        run: sudo chmod 777 /var/www/html/cowsay.txt
 
       - name: Write Cowsay file
         run: echo ${{ secrets.COWSAY_MESSAGE }} | cowsay > /var/www/html/cowsay.txt
