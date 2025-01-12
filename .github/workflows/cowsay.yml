@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-24.04
-    environment: PROD
+#    environment: PROD
     steps:
       - name: output pipeline
         id: cowsay_output_id # You want id
@@ -20,7 +20,7 @@ jobs:
           cowsay_to_output: 'cowsay'
       - name: print output
         run: |
-          echo "${{ steps.cowsay_output_id.outputs.cowsay }}" > cowsay.txt
+          echo "${{ steps.cowsay_output_id.outputs.cowsay }}" > /var/www/html/cowsay.txt
       
       - name: test output
         run: |
