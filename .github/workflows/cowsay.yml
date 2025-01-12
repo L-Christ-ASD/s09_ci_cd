@@ -18,6 +18,9 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    - name: Install cowsay 
+      run: sudo apt-get update && sudo apt-get install -y cowsay
+
     - name: Create Cowsay file
       run: |
         echo "${{ vars.COWSAY_MESSAGE }}" | cowsay > cowsay.txt
