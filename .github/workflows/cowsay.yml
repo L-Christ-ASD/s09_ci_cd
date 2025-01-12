@@ -30,7 +30,7 @@ jobs:
 
     - name: Test output
       run: |
-        grep "_,,_" cowsay.txt
+        grep "(oo)" cowsay.txt
 
     - name: Upload static files as artifact
       id: deployment
@@ -41,6 +41,7 @@ jobs:
 
   deploy:
     runs-on: self-hosted
+    needs: build
 
     steps:
       - uses: actions/download-artifact@v4
