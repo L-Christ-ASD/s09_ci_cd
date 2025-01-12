@@ -25,6 +25,9 @@ jobs:
       run: |
         echo "${{ vars.COWSAY_MESSAGE }}" | cowsay > cowsay.txt
 
+    - name: Print Cowsay output 
+      run: cat cowsay.txt
+
     - name: Test output
       run: |
         grep "_,,_" cowsay.txt
