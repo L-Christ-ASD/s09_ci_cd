@@ -20,7 +20,7 @@ jobs:
 
     - name: Create Cowsay file
       run: |
-        echo ${{ vars.COWSAY_MESSAGE }} | cowsay > cowsay.txt
+        echo "${{ vars.COWSAY_MESSAGE }}" | cowsay > cowsay.txt
 
     - name: Test output
       run: |
