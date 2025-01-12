@@ -1,67 +1,43 @@
-name: Cowsay Workflow
+---
+
+name: generate a cowsay
 
 on:
+  workflow_dispatch:
   push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-
+    runs-on: ubuntu-24.04
+    environment: PROD
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Install cowsay 
-      run: sudo apt-get update && sudo apt-get install -y cowsay
-
-    - name: Create Cowsay variable
-      run: |
-        echo "${{ vars.COWSAY_MESSAGE }}" | cowsay > cowsay.txt
-
-    - name: Print Cowsay output 
-      run: cat cowsay.txt
-
-    - name: Test output
-      run: |
-        grep "(oo)" cowsay.txt
-
-    - name: Upload static files as artifact
-      id: deployment
-      uses: actions/upload-artifact@v4
-      with:
-        path: cowsay.txt
-        name: notrevache
+      - name: output pipeline
+        id: cowsay_output_id # You want id
+        uses: Code-Hex/neo-cowsay-action@v1
+        with:
+          message: ${{ vars.COWSAY_MESSAGE }}
+          cow: 'gopher' # ascii art list: https://github.com/Code-Hex/Neo-cowsay/tree/master/cows
+          cowsay_to_output: 'cowsay'
+      - name: print output
+        run: |
+          echo "${{ steps.cowsay_output_id.outputs.cowsay }}" > cowsay.txt
+      
+      - name: test output
+        run: |
+          grep "_,,_" cowsay.txt
+      
+      - name: Upload static files as artifact
+        id: deployment
+        uses: actions/upload-artifact@v4 # or specific "vX.X.X" version tag for this action
+        with:
+          path: cowsay.txt
+          name: notrevache
 
   deploy:
     runs-on: self-hosted
     needs: build
-
     steps:
-      - name: Ensure artifact directory exists
-        run: mkdir -p /var/www/html/
-
-      - name: Check directory permissions
-        run: ls -ld /var/www/html
-
-      - name: Check network connectivity
-        run: ping -c 4 github.com
-
-      - name: Download artifact
-        uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v4
         with:
           path: /var/www/html/
           name: notrevache
-
-      - name: Print downloaded files
-        run: ls -la /var/www/html/
-
-      - name: Grant write permissions
-        run: sudo chmod 777 /var/www/html/cowsay.txt
-
-      - name: Write Cowsay file
-        run: echo ${{ secrets.COWSAY_MESSAGE }} | cowsay > /var/www/html/cowsay.txt
