@@ -15,3 +15,14 @@
 
 **Bonus**:
 Reproduisez les même étapes, mais ce coup ci avec un message secret, dans un fichier secret.txt.
+
+
+## Quatrième challenge Github
+
+Créez ou utilisez un dépôt personnel Github.
+Préparer un Dockerfile pour faire un cowsay ou autre.
+Créer un workflow Github action nommé docker-build.yml
+Implémentez la logique suivante dans votre workflow en utilisant des actions faite pour cela :
+Buildez une image Docker
+Connectez vous sur le registre docker hub
+push votre image dans le docker hub.
