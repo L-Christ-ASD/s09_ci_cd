@@ -27,6 +27,9 @@ jobs:
 
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
+      
+      - name: Print Docker tags 
+        run: echo ${{ steps.meta.outputs.tags }}
           
 
       - name: Login to Docker Hub
@@ -34,6 +37,9 @@ jobs:
         with:
           username: ${{ vars.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_CHRIST_TOKEN_MD }}
+
+      - name: Docker info 
+        run: docker info
 
       - name: Build and push
         uses: docker/build-push-action@v6
