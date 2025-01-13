@@ -23,10 +23,18 @@ Reproduisez les même étapes, mais ce coup ci avec un message secret, dans un f
 
 ## Quatrième challenge Github
 
-Créez ou utilisez un dépôt personnel Github.
-Préparer un Dockerfile pour faire un cowsay ou autre.
-Créer un workflow Github action nommé docker-build.yml
-Implémentez la logique suivante dans votre workflow en utilisant des actions faite pour cela :
-Buildez une image Docker
-Connectez vous sur le registre docker hub
-push votre image dans le docker hub.
+1. Créez ou utilisez un dépôt personnel Github.
+2. Préparer un Dockerfile pour faire un cowsay ou autre.
+3. Créer un workflow Github action nommé docker-build.yml
+4. Implémentez la logique suivante dans votre workflow en utilisant des actions faite pour cela :
+5. Buildez une image Docker
+6. Connectez vous sur le registre docker hub
+7. push votre image dans le docker hub.
+
+
+
+**Quelsque cmd utiles**
+
+git tag -a vx.x.x -m"exemple"
+git push origin <tag_name> (vx.x.x)
+
