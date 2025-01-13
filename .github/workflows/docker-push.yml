@@ -1,4 +1,4 @@
-name: ci docker push image
+name: docker push
 
 on:
   workflow_dispatch:
