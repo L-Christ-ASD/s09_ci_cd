@@ -2,7 +2,9 @@
 
 ![Create Cowsay file](https://github.com/L-Christ-ASD/s09_ci_cd/actions/workflows/cowsay.yml/badge.svg)
 
-![ci docker push image](https://github.com/L-Christ-ASD/s09_ci_cd/actions/workflows/docker-push.yml/badge.svg)
+
+![Docker Push](https://github.com/L-Christ-ASD/s09_ci_cd/actions/workflows/docker-push.yml/badge.svg)
+
 
 ## challenge of the Saison09
 
